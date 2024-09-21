@@ -12,6 +12,8 @@ export class DataListComponent implements OnInit {
   data: any;
   id: any;
   count: any = 0;
+  today:any = 'getToday';
+
   constructor(private dataService:DataService) { }
 
   showData() {
@@ -24,6 +26,7 @@ export class DataListComponent implements OnInit {
     this.data = null;
     this.id = null;
     this.count = 0;
+    this.today = 'getToday';
   }
 
   checkId(id: any) {
@@ -41,6 +44,11 @@ export class DataListComponent implements OnInit {
 
   countMinus (){
     this.count--;
+  }
+
+  getToday() {
+    this.today = new Date().toLocaleDateString();
+    return this.today;
   }
 
   ngOnInit(): void {
