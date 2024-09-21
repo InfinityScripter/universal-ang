@@ -4,6 +4,11 @@
 <button (click)="checkId(id)">checkId</button>
 <button (click)="resetData()"> reset</button>
 
+<div>{{count}}</div>
+
+<button (click)="countPlus()">Increment+</button>
+<button (click)="countMinus()">Increment-</button>
+
 <ul *ngIf="data">
   <li *ngFor="let item of data">
     {{ item.name }}

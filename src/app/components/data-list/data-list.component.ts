@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from "../../services/data.service";
-import {map, pipe} from "rxjs";
+import {map} from "rxjs";
 
 @Component({
   selector: 'app-data-list',
@@ -11,7 +11,7 @@ export class DataListComponent implements OnInit {
 
   data: any;
   id: any;
-
+  count: any = 0;
   constructor(private dataService:DataService) { }
 
   showData() {
@@ -23,6 +23,7 @@ export class DataListComponent implements OnInit {
   resetData() {
     this.data = null;
     this.id = null;
+    this.count = 0;
   }
 
   checkId(id: any) {
@@ -32,6 +33,14 @@ export class DataListComponent implements OnInit {
     ).subscribe(filteredData => {
       this.data = filteredData;
     });
+  }
+
+  countPlus (){
+    this.count++;
+  }
+
+  countMinus (){
+    this.count--;
   }
 
   ngOnInit(): void {
