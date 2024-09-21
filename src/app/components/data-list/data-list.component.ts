@@ -32,7 +32,13 @@ export class DataListComponent implements OnInit {
   checkId(id: any) {
     const numericId = Number(id);
     this.dataService.getData().pipe(
-      map((data: any) => (data as any[]).filter(item => item.id === numericId))
+      map((data: any) => {
+        const filteredData = (data as any[]).filter(item => item.id === numericId);
+        if (filteredData.length === 0) {
+          return [{ name: 'No matching user found' }];
+        }
+        return filteredData;
+      })
     ).subscribe(filteredData => {
       this.data = filteredData;
     });
