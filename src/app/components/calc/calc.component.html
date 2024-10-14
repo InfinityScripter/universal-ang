@@ -1,0 +1,37 @@
+<ng-container *ngFor="let group of calcGroup; let i = index">
+  <div>
+    <span>(</span>
+    <select [(ngModel)]="group.first.modification">
+      <option [value]="unit.value" *ngFor="let unit of calcModifiers | keyvalue">{{ unit.value }}</option>
+    </select>
+    <input type="number" [(ngModel)]="group.first.value">
+    <select [(ngModel)]="group.operation">
+      <option [value]="op.value" *ngFor="let op of calcOperations | keyvalue">{{ op.value }}</option>
+    </select>
+    <select [(ngModel)]="group.second.modification">
+      <option [value]="unit.value" *ngFor="let unit of calcModifiers | keyvalue">{{ unit.value }}</option>
+    </select>
+    <input type="number" [(ngModel)]="group.second.value">
+    <span>)</span>
+  </div>
+
+  <select [(ngModel)]="operationsForGroup[i]" *ngIf="i < calcGroup.length - 1">
+    <option [value]="op.value" *ngFor="let op of calcOperations | keyvalue">{{ op.value }}</option>
+  </select>
+
+  <button *ngIf="i !== 0" (click)="removeGroup(i)">Удалить</button>
+</ng-container>
+
+<span>Результат: {{ result }}</span>
+
+<div>
+  <button (click)="calculateGroup()">Рассчитать</button>
+  <button (click)="addGroup()">Добавить</button>
+</div>
+
+<div>
+  <span>История операций:</span>
+  <ng-container *ngFor="let entry of history">
+    <div>{{ entry }}</div>
+  </ng-container>
+</div>

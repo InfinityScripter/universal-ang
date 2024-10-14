@@ -1,0 +1,40 @@
+<h1>post-list works!</h1>
+<button (click)="getPosts()">getPost</button>
+<button (click)="resetPosts()">resetPosts</button>
+<input type="text" [(ngModel)]="id" placeholder="Enter id">
+<button (click)="getPost(id)">get post from id</button>
+
+<div *ngIf="post">
+  <h2>{{ post.title }}</h2>
+  <p>{{ post.body }}</p>
+</div>
+
+<form (ngSubmit)="addPost(data)">
+  <label for="title">Title:</label>
+  <input type="text" id="title" [(ngModel)]="data.title" name="title" required>
+
+  <label for="body">Body:</label>
+  <textarea id="body" [(ngModel)]="data.body" name="body" required></textarea>
+
+  <button type="submit">Add Post</button>
+</form>
+
+<!-- Форма для обновления поста -->
+<form (ngSubmit)="updatePost(id, data)">
+  <label for="updateTitle">Update Title:</label>
+  <input type="text" id="updateTitle" [(ngModel)]="data.title" name="updateTitle" required>
+
+  <label for="updateBody">Update Body:</label>
+  <textarea id="updateBody" [(ngModel)]="data.body" name="updateBody" required></textarea>
+
+  <button type="submit">Update Post</button>
+</form>
+
+
+<ul>
+  <li *ngFor="let post of posts">
+    {{ post.title }}
+  </li>
+</ul>
+
+
