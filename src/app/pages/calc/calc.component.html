@@ -1,0 +1,67 @@
+<ng-container *ngFor="let group of calcGroup; let i = index">
+  <div class="flex items-center p-2">
+    <span>(</span>
+
+
+    <mat-form-field class="w-32">
+      <mat-select [(ngModel)]="group.first.modification">
+        <mat-option [value]="unit.value" *ngFor="let unit of calcModifiers | keyvalue">{{ unit.value }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field class="w-20">
+      <input matInput type="number" [(ngModel)]="group.first.value">
+    </mat-form-field>
+
+
+    <mat-form-field class="w-20">
+      <mat-select [(ngModel)]="group.operation">
+        <mat-option [value]="op.value" *ngFor="let op of calcOperations | keyvalue">{{ op.value }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field class="w-32">
+      <mat-select [(ngModel)]="group.second.modification">
+        <mat-option [value]="unit.value" *ngFor="let unit of calcModifiers | keyvalue">{{ unit.value }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field class="w-20">
+      <input matInput type="number" [(ngModel)]="group.second.value">
+    </mat-form-field>
+
+    <span>)</span>
+
+
+    <mat-form-field *ngIf="i < calcGroup.length - 1" class="w-20">
+      <mat-select [(ngModel)]="operationsForGroup[i]">
+        <mat-option [value]="op.value" *ngFor="let op of calcOperations | keyvalue">{{ op.value }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <button class="" mat-button *ngIf="i !== 0" (click)="removeGroup(i)">Удалить</button>
+  </div>
+</ng-container>
+
+
+<span class="p-2">Результат: {{ result }}</span>
+
+
+<div class="flex space-x-4 mt-4">
+  <button mat-raised-button color="primary" (click)="calculateGroup()">Рассчитать</button>
+  <button mat-raised-button color="accent" (click)="addGroup()">Добавить</button>
+</div>
+
+
+<div class="mt-4">
+  <span class="font-bold">История операций:</span>
+  <div class="mt-2 space-y-2">
+    <ng-container *ngFor="let entry of history">
+      <div class="bg-gray-100 p-2 rounded">{{ entry }}</div>
+    </ng-container>
+  </div>
+</div>

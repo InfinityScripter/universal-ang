@@ -1,0 +1,43 @@
+<ul class="flex justify-start items-center gap-4 bg-gray-200 p-4">
+  <li>
+    <a mat-flat-button
+       color="primary"
+       routerLink="/"
+       routerLinkActive="mat-accent"
+       [routerLinkActiveOptions]="{ exact: true }"
+       class="text-white">
+      <mat-icon>home</mat-icon>
+      <span class="ml-2">Home</span>
+    </a>
+  </li>
+  <li>
+    <a mat-flat-button
+       color="primary"
+       routerLink="/calc"
+       routerLinkActive="mat-accent"
+       class="text-white">
+      <mat-icon>calculate</mat-icon>
+      <span class="ml-2">Calc</span>
+    </a>
+  </li>
+  <li>
+    <a mat-flat-button
+       color="primary"
+       routerLink="/contact"
+       routerLinkActive="mat-accent"
+       class="text-white">
+      <mat-icon>contact_mail</mat-icon>
+      <span class="ml-2">Contact</span>
+    </a>
+  </li>
+  <li>
+    <a mat-flat-button
+       color="primary"
+       routerLink="/about"
+       routerLinkActive="mat-accent"
+       class="text-white">
+      <mat-icon>person</mat-icon>
+      <span class="ml-2">About</span>
+    </a>
+  </li>
+</ul>
