@@ -21,6 +21,9 @@ export class WeatherComponent implements OnInit {
   // Массив предложений городов
   filteredCities$: Observable<any[]> | undefined;
 
+  // New property for grouped forecast data
+  forecastByDay: any[] = [];
+
   constructor(private weatherService: WeatherService) {
     // Инициализация формы с контролем для ввода города
     this.weatherForm = new FormGroup({
@@ -82,6 +85,7 @@ export class WeatherComponent implements OnInit {
       this.weatherForecast = null;
       this.airPollution = null;
       this.uvIndex = null;
+      this.forecastByDay = [];
       return of(null);
     }
 
@@ -91,8 +95,11 @@ export class WeatherComponent implements OnInit {
         const lat = current.coord.lat;
         const lon = current.coord.lon;
         return this.weatherService.getWeatherForecast(city).pipe(
-          switchMap(forecast => {
+          tap(forecast => {
             this.weatherForecast = forecast;
+            this.processForecastData(forecast);
+          }),
+          switchMap(() => {
             return this.weatherService.getAirPollution(lat, lon).pipe(
               switchMap(pollution => {
                 this.airPollution = pollution;
@@ -112,9 +119,37 @@ export class WeatherComponent implements OnInit {
         this.weatherForecast = null;
         this.airPollution = null;
         this.uvIndex = null;
+        this.forecastByDay = [];
         return of(null);
       })
     );
+  }
+
+  /**
+   * Process the forecast data to group entries by day
+   * @param forecastData The raw forecast data from the API
+   */
+  processForecastData(forecastData: any) {
+    const forecastByDay: any[] = [];
+    let currentDate = '';
+    let currentDayData: any[] = [];
+
+    forecastData.list.forEach((item: any) => {
+      const date = new Date(item.dt_txt).toDateString();
+      if (date !== currentDate) {
+        if (currentDayData.length > 0) {
+          forecastByDay.push({ date: currentDate, data: currentDayData });
+        }
+        currentDate = date;
+        currentDayData = [];
+      }
+      currentDayData.push(item);
+    });
+    // Push the last day's data
+    if (currentDayData.length > 0) {
+      forecastByDay.push({ date: currentDate, data: currentDayData });
+    }
+    this.forecastByDay = forecastByDay;
   }
 
   /**
@@ -145,7 +180,6 @@ export class WeatherComponent implements OnInit {
    */
   onOptionSelected(event: any) {
     const selectedCityName = event.option.value;
-    // Optionally update the form control if needed
     this.weatherForm.get('city')?.setValue(selectedCityName, { emitEvent: false });
     this.getWeatherData(selectedCityName).subscribe();
   }

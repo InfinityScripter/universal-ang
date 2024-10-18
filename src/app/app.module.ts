@@ -19,7 +19,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {CalcComponent} from "./pages/calc/calc.component";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
-import { WeatherComponent } from './components/weather/weather.component';
+import {WeatherComponent} from './components/weather/weather.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
