@@ -1,4 +1,4 @@
-<ul class="flex justify-start items-center gap-4 bg-gray-200 p-4">
+<ul #navBar class="flex justify-start items-center gap-4 bg-gray-100 bg-opacity-50 backdrop-blur p-4 rounded-lg">
   <li>
     <a mat-flat-button
        color="primary"
@@ -38,6 +38,16 @@
        class="text-white">
       <mat-icon>person</mat-icon>
       <span class="ml-2">About</span>
+    </a>
+  </li>
+  <li>
+    <a mat-flat-button
+       color="primary"
+       routerLink="/weather"
+       routerLinkActive="mat-accent"
+       class="text-white">
+      <mat-icon>thermostat</mat-icon>
+      <span class="ml-2">Weather</span>
     </a>
   </li>
 </ul>

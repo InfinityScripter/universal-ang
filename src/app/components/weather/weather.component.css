@@ -1,0 +1,28 @@
+.weather-container {
+  @apply bg-gradient-to-r from-blue-500 to-indigo-600 min-h-screen p-4;
+}
+
+.weather-card {
+  @apply bg-white bg-opacity-80 rounded-lg;
+}
+
+.forecast-list {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4;
+}
+
+.forecast-item {
+  @apply bg-gray-100 rounded-lg p-4 flex flex-col items-center shadow-md;
+}
+
+.error-message {
+  @apply text-red-500 text-center;
+}
+
+.current-weather img, .forecast-item img {
+  @apply w-16 h-16;
+}
+
+.air-pollution p, .uv-index p {
+  @apply text-lg;
+}
+

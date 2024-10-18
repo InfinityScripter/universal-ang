@@ -7,7 +7,7 @@ import {UserProfileComponent} from "./components/user-profile/user-profile.compo
 import {MaskEmailPipe} from "./helpers/pipe/mask-email.pipe";
 import {HttpClientModule} from "@angular/common/http";
 import {DataListComponent} from './components/data-list/data-list.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {PostListComponent} from './components/post-list/post-list.component';
 import {HomeComponent} from './pages/home/home.component';
 import {AboutComponent} from './pages/about/about.component';
@@ -19,6 +19,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {CalcComponent} from "./pages/calc/calc.component";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
+import { WeatherComponent } from './components/weather/weather.component';
+import {MatCardModule} from "@angular/material/card";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 @NgModule({
   declarations: [
@@ -30,7 +34,8 @@ import {MatSelectModule} from "@angular/material/select";
     AboutComponent,
     ContactComponent,
     CalcComponent,
-    NavBarComponent
+    NavBarComponent,
+    WeatherComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +47,11 @@ import {MatSelectModule} from "@angular/material/select";
     MatButtonModule,
     MatIconModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

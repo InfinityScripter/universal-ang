@@ -4,13 +4,17 @@ import {AboutComponent} from "./pages/about/about.component";
 import {ContactComponent} from "./pages/contact/contact.component";
 import {HomeComponent} from "./pages/home/home.component";
 import {CalcComponent} from "./pages/calc/calc.component";
+import {WeatherComponent} from "./components/weather/weather.component";
 
 const routes: Routes = [
   {path:'calc', component: CalcComponent},
   {path:'about', component: AboutComponent},
   {path:'contact', component: ContactComponent},
-  {path:'',component:HomeComponent}
+  {path:'',component:HomeComponent},
+  { path: 'weather', component: WeatherComponent }, // Добавляем маршрут для погоды
+  { path: '**', redirectTo: '' } // Перенаправление на главную для неизвестных маршрутов
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,0 +1,134 @@
+<div class="weather-container mx-auto p-4 max-w-3xl">
+  <mat-card class="weather-card shadow-lg">
+    <mat-card-header>
+      <mat-card-title class="text-2xl font-semibold">Погода</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="weatherForm" class="weather-form mb-4">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Введите название города</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="city"
+            placeholder="Москва"
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+            <mat-option *ngFor="let city of filteredCities$ | async" [value]="city.name">
+              {{ city.name }}, {{ city.country }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+
+      <div *ngIf="isLoading" class="flex justify-center my-4">
+        <mat-spinner></mat-spinner>
+      </div>
+
+      <div *ngIf="errorMessage" class="error-message text-red-500 text-center mb-4">
+        {{ errorMessage }}
+      </div>
+
+      <div *ngIf="currentWeather" class="current-weather mb-6">
+        <mat-card class="mb-4">
+          <mat-card-header>
+            <mat-card-title>Текущая погода в {{ currentWeather.name }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="flex items-center">
+            <img
+              [src]="'http://openweathermap.org/img/wn/' + currentWeather.weather[0].icon + '@2x.png'"
+              alt="Иконка погоды"
+              class="w-24 h-24"
+            />
+            <div class="ml-4">
+              <p class="text-lg">Температура: {{ currentWeather.main.temp }}°C</p>
+              <p class="text-lg">Ощущается как: {{ currentWeather.main.feels_like }}°C</p>
+              <p class="text-lg">Влажность: {{ currentWeather.main.humidity }}%</p>
+              <p class="text-lg">Скорость ветра: {{ currentWeather.wind.speed }} м/с</p>
+              <p class="text-lg capitalize">Описание: {{ currentWeather.weather[0].description }}</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div *ngIf="weatherForecast" class="weather-forecast mb-6">
+        <mat-card class="mb-4">
+          <mat-card-header>
+            <mat-card-title>Прогноз погоды</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="forecast-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              <div
+                class="forecast-item p-2 border rounded shadow-sm flex flex-col items-center"
+                *ngFor="let item of weatherForecast.list"
+              >
+                <p class="font-medium">{{ item.dt_txt | date: 'EEE, MMM d' }}</p>
+                <img
+                  [src]="'http://openweathermap.org/img/wn/' + item.weather[0].icon + '@2x.png'"
+                  alt="Иконка погоды"
+                  class="w-16 h-16"
+                />
+                <p class="text-lg">Температура: {{ item.main.temp }}°C</p>
+                <p class="capitalize">{{ item.weather[0].description }}</p>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div *ngIf="airPollution" class="air-pollution mb-6">
+        <mat-card class="mb-4">
+          <mat-card-header>
+            <mat-card-title>Загрязнение воздуха</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="data-item">
+                <p class="text-lg font-medium">
+                  AQI: {{ airPollution.list[0].main.aqi }} ({{ getAQIDescription(airPollution.list[0].main.aqi) }})
+                </p>
+              </div>
+              <div class="data-item">
+                <p class="text-lg">CO: {{ airPollution.list[0].components.co }} μg/m³</p>
+              </div>
+              <div class="data-item">
+                <p class="text-lg">NO: {{ airPollution.list[0].components.no }} μg/m³</p>
+              </div>
+              <div class="data-item">
+                <p class="text-lg">NO₂: {{ airPollution.list[0].components.no2 }} μg/m³</p>
+              </div>
+              <div class="data-item">
+                <p class="text-lg">O₃: {{ airPollution.list[0].components.o3 }} μg/m³</p>
+              </div>
+              <div class="data-item">
+                <p class="text-lg">SO₂: {{ airPollution.list[0].components.so2 }} μg/m³</p>
+              </div>
+              <div class="data-item">
+                <p class="text-lg">PM2.5: {{ airPollution.list[0].components.pm2_5 }} μg/m³</p>
+              </div>
+              <div class="data-item">
+                <p class="text-lg">PM10: {{ airPollution.list[0].components.pm10 }} μg/m³</p>
+              </div>
+              <div class="data-item">
+                <p class="text-lg">NH₃: {{ airPollution.list[0].components.nh3 }} μg/m³</p>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div *ngIf="uvIndex" class="uv-index mb-6">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>UV-индекс</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="text-lg">Максимальный UV-индекс: {{ uvIndex.daily.uv_index_max[0] }}</p>
+            <p class="text-lg">Максимальный UV-индекс при ясном небе: {{ uvIndex.daily.uv_index_clear_sky_max[0] }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
