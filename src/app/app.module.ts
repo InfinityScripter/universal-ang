@@ -23,6 +23,8 @@ import {WeatherComponent} from './components/weather/weather.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {CarouselModule} from "primeng/carousel";
+import {TagModule} from "primeng/tag";
 
 @NgModule({ declarations: [
         AppComponent,
@@ -37,17 +39,17 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
         WeatherComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
-        AppRoutingModule,
-        MaskEmailPipe,
-        FormsModule,
-        BrowserAnimationsModule,
-        MatButtonModule,
-        MatIconModule,
-        MatInputModule,
-        MatSelectModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatProgressSpinnerModule,
-        MatAutocompleteModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+    AppRoutingModule,
+    MaskEmailPipe,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    MatAutocompleteModule, CarouselModule, TagModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {
 }

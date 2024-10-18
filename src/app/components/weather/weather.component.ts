@@ -4,6 +4,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, catchError, tap, map } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 
+// Импорт необходимых модулей PrimeNG
+import { CarouselModule } from 'primeng/carousel';
+import { ButtonModule } from 'primeng/button';
+import { TagModule } from 'primeng/tag';
+
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
@@ -21,14 +26,36 @@ export class WeatherComponent implements OnInit {
   // Массив предложений городов
   filteredCities$: Observable<any[]> | undefined;
 
-  // New property for grouped forecast data
-  forecastByDay: any[] = [];
+  // Новое свойство для данных прогноза погоды в карусели
+  forecastList: any[] = [];
+
+  // Опции для адаптивности карусели
+  responsiveOptions: any[];
 
   constructor(private weatherService: WeatherService) {
     // Инициализация формы с контролем для ввода города
     this.weatherForm = new FormGroup({
       city: new FormControl('')
     });
+
+    // Инициализация опций адаптивности карусели
+    this.responsiveOptions = [
+      {
+        breakpoint: '1199px',
+        numVisible: 3,
+        numScroll: 1
+      },
+      {
+        breakpoint: '991px',
+        numVisible: 2,
+        numScroll: 1
+      },
+      {
+        breakpoint: '767px',
+        numVisible: 1,
+        numScroll: 1
+      }
+    ];
   }
 
   ngOnInit(): void {
@@ -85,7 +112,7 @@ export class WeatherComponent implements OnInit {
       this.weatherForecast = null;
       this.airPollution = null;
       this.uvIndex = null;
-      this.forecastByDay = [];
+      this.forecastList = [];
       return of(null);
     }
 
@@ -119,37 +146,28 @@ export class WeatherComponent implements OnInit {
         this.weatherForecast = null;
         this.airPollution = null;
         this.uvIndex = null;
-        this.forecastByDay = [];
+        this.forecastList = [];
         return of(null);
       })
     );
   }
 
   /**
-   * Process the forecast data to group entries by day
-   * @param forecastData The raw forecast data from the API
+   * Обработка данных прогноза для карусели
+   * @param forecastData Сырые данные прогноза от API
    */
   processForecastData(forecastData: any) {
-    const forecastByDay: any[] = [];
-    let currentDate = '';
-    let currentDayData: any[] = [];
-
-    forecastData.list.forEach((item: any) => {
-      const date = new Date(item.dt_txt).toDateString();
-      if (date !== currentDate) {
-        if (currentDayData.length > 0) {
-          forecastByDay.push({ date: currentDate, data: currentDayData });
-        }
-        currentDate = date;
-        currentDayData = [];
-      }
-      currentDayData.push(item);
+    this.forecastList = forecastData.list.map((item: any) => {
+      return {
+        date: new Date(item.dt_txt),
+        temp: item.main.temp,
+        feels_like: item.main.feels_like,
+        description: item.weather[0].description,
+        icon: item.weather[0].icon,
+        humidity: item.main.humidity,
+        wind_speed: item.wind.speed,
+      };
     });
-    // Push the last day's data
-    if (currentDayData.length > 0) {
-      forecastByDay.push({ date: currentDate, data: currentDayData });
-    }
-    this.forecastByDay = forecastByDay;
   }
 
   /**
@@ -182,5 +200,22 @@ export class WeatherComponent implements OnInit {
     const selectedCityName = event.option.value;
     this.weatherForm.get('city')?.setValue(selectedCityName, { emitEvent: false });
     this.getWeatherData(selectedCityName).subscribe();
+  }
+
+  /**
+   * Получение уровня серьёзности для тега на основе описания погоды
+   * @param description Описание погоды
+   * @returns Строка с уровнем серьёзности
+   */
+  getSeverity(description: string) {
+    if (description.includes('дождь')) {
+      return 'info';
+    } else if (description.includes('ясно')) {
+      return 'success';
+    } else if (description.includes('облачно')) {
+      return 'warning';
+    } else {
+      return 'secondary';
+    }
   }
 }
