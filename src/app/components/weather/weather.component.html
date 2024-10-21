@@ -36,7 +36,7 @@
           </mat-card-header>
           <mat-card-content class="flex items-center">
             <img
-              [src]="'http://openweathermap.org/img/wn/' + currentWeather.weather[0].icon + '@2x.png'"
+              [src]="'https://openweathermap.org/img/wn/' + currentWeather.weather[0].icon + '@2x.png'"
               alt="Иконка погоды"
               class="w-24 h-24"
             />
@@ -69,7 +69,7 @@
                 <div class="forecast-item p-2 border rounded shadow-sm flex flex-col items-center">
                   <p class="font-medium">{{ item.date | date: 'EEE, d MMM HH:mm' }}</p>
                   <img
-                    [src]="'http://openweathermap.org/img/wn/' + item.icon + '@2x.png'"
+                    [src]="'https://openweathermap.org/img/wn/' + item.icon + '@2x.png'"
                     alt="Иконка погоды"
                     class="w-16 h-16"
                   />
