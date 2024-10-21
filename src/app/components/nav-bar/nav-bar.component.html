@@ -1,4 +1,5 @@
-<ul #navBar class="flex justify-start items-center gap-4 bg-gray-100 bg-opacity-50 backdrop-blur p-4 rounded-lg">
+<!-- Desktop Navigation -->
+<ul *ngIf="!isMobile" #navBar class="flex justify-start items-center gap-4 bg-gray-100 bg-opacity-50 backdrop-blur p-4 rounded-lg">
   <li>
     <a mat-flat-button
        color="primary"
@@ -51,3 +52,49 @@
     </a>
   </li>
 </ul>
+
+<!-- Mobile Navigation (p-toolbar) -->
+<p-toolbar *ngIf="isMobile" styleClass=" bg-gray-100 bg-opacity-50 backdrop-blur">
+  <ng-template pTemplate="start">
+    <a mat-icon-button
+       color="primary"
+       routerLink="/"
+       routerLinkActive="mat-accent"
+       [routerLinkActiveOptions]="{ exact: true }"
+       class="text-white">
+      <mat-icon>home</mat-icon>
+    </a>
+  </ng-template>
+  <ng-template pTemplate="center">
+    <div class="flex flex-wrap items-center gap-3">
+      <a mat-icon-button
+         color="primary"
+         routerLink="/calc"
+         routerLinkActive="mat-accent"
+         class="text-white">
+        <mat-icon>calculate</mat-icon>
+      </a>
+      <a mat-icon-button
+         color="primary"
+         routerLink="/contact"
+         routerLinkActive="mat-accent"
+         class="text-white">
+        <mat-icon>contact_mail</mat-icon>
+      </a>
+      <a mat-icon-button
+         color="primary"
+         routerLink="/about"
+         routerLinkActive="mat-accent"
+         class="text-white">
+        <mat-icon>person</mat-icon>
+      </a>
+      <a mat-icon-button
+         color="primary"
+         routerLink="/weather"
+         routerLinkActive="mat-accent"
+         class="text-white">
+        <mat-icon>thermostat</mat-icon>
+      </a>
+    </div>
+  </ng-template>
+</p-toolbar>

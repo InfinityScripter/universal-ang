@@ -25,6 +25,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {CarouselModule} from "primeng/carousel";
 import {TagModule} from "primeng/tag";
+import {ToolbarModule} from "primeng/toolbar";
 
 @NgModule({ declarations: [
         AppComponent,
@@ -38,7 +39,8 @@ import {TagModule} from "primeng/tag";
         NavBarComponent,
         WeatherComponent
     ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
+    bootstrap: [AppComponent],
+  imports: [BrowserModule,
     AppRoutingModule,
     MaskEmailPipe,
     FormsModule,
@@ -50,6 +52,6 @@ import {TagModule} from "primeng/tag";
     ReactiveFormsModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    MatAutocompleteModule, CarouselModule, TagModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+    MatAutocompleteModule, CarouselModule, TagModule, ToolbarModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {
 }

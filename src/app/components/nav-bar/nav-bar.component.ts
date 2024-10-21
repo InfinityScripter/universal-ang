@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import {Component, AfterViewInit, ElementRef, ViewChild, HostListener} from '@angular/core';
 import { gsap } from 'gsap';
 
 @Component({
@@ -9,6 +9,21 @@ import { gsap } from 'gsap';
 export class NavBarComponent implements AfterViewInit {
   // Получаем доступ к элементу навигационного бара
   @ViewChild('navBar', { static: true }) navBar!: ElementRef;
+
+  isMobile = false;
+
+  ngOnInit() {
+    this.checkScreenWidth();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.checkScreenWidth();
+  }
+
+  checkScreenWidth() {
+    this.isMobile = window.innerWidth <= 768; // Устанавливаем ширину экрана для мобильной версии
+  }
 
   ngAfterViewInit() {
     this.animateNavBar();
