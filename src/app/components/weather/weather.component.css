@@ -16,7 +16,7 @@
 }
 
 .forecast-item {
-  @apply bg-gray-100 rounded-lg p-4 flex flex-col items-center shadow-md;
+  @apply  rounded-lg p-4 flex flex-col items-center shadow-md;
 }
 
 .error-message {
