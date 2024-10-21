@@ -8,7 +8,7 @@ import {WeatherComponent} from "./components/weather/weather.component";
 
 const routes: Routes = [
   {path: 'calc', component: CalcComponent},
-  {path: 'about', component: AboutComponent},
+  {path: 'users', component: AboutComponent},
   {path: 'contact', component: ContactComponent},
   {path: '', component: HomeComponent},
   {path: 'weather', component: WeatherComponent},

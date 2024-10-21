@@ -61,7 +61,7 @@ export class WeatherComponent implements OnInit {
   ngOnInit(): void {
     // Настройка автозаполнения для поля ввода города
     this.filteredCities$ = this.weatherForm.get('city')?.valueChanges.pipe(
-      debounceTime(300),
+      debounceTime(700),
       distinctUntilChanged(),
       tap(() => {
         this.errorMessage = '';
@@ -83,7 +83,7 @@ export class WeatherComponent implements OnInit {
 
     // Подписка на изменения в поле ввода города
     this.weatherForm.get('city')?.valueChanges.pipe(
-      debounceTime(500),
+      debounceTime(570),
       distinctUntilChanged(),
       tap(() => {
         this.isLoading = true;

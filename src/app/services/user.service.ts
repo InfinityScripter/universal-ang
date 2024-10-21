@@ -6,7 +6,7 @@ import {Injectable} from "@angular/core";
 })
 
 export class UserService {
-  getUser() {
+  getUserMock() {
     return {
       name: 'Misha',
       age: 35,

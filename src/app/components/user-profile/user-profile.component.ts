@@ -12,7 +12,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private userService:UserService) { }
 
   showUser () {
-    this.user = this.userService.getUser();
+    this.user = this.userService.getUserMock();
   }
 
   ngOnInit(): void {
