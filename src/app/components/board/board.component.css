@@ -1,0 +1,15 @@
+main {
+  display: grid;
+  grid-template-columns: 150px 150px 150px;
+  grid-gap: 0;
+}
+
+app-square {
+  border: 1px solid #294084;
+  height: 150px;
+  align-content: center;
+  text-align: center;
+}
+
+
+

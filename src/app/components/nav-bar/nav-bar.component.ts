@@ -26,8 +26,9 @@ export class NavBarComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+    if (this.navBar) {
     this.animateNavBar();
-    this.addHoverAnimations();
+    this.addHoverAnimations();}
   }
 
   // Функция для анимации навигационного бара

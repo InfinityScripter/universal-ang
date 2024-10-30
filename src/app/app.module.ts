@@ -26,6 +26,9 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {CarouselModule} from "primeng/carousel";
 import {TagModule} from "primeng/tag";
 import {ToolbarModule} from "primeng/toolbar";
+import {UserCardComponent} from "./components/user-card/user-card.component";
+import {BoardComponent} from "./components/board/board.component";
+import {SquareComponent} from "./components/square/square.component";
 
 @NgModule({ declarations: [
         AppComponent,
@@ -52,6 +55,6 @@ import {ToolbarModule} from "primeng/toolbar";
     ReactiveFormsModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    MatAutocompleteModule, CarouselModule, TagModule, ToolbarModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+    MatAutocompleteModule, CarouselModule, TagModule, ToolbarModule, UserCardComponent, SquareComponent, BoardComponent], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {
 }

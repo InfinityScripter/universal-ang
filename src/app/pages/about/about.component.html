@@ -1,1 +1,5 @@
-<p>about works!</p>
+<ul>
+  <li *ngFor="let user of users">
+    <app-user-card [user]="user"></app-user-card>
+  </li>
+</ul>

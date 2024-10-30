@@ -1,0 +1,20 @@
+<div class="user-card">
+  <p><strong>id</strong> - {{ user.id }}</p>
+  <p><strong>name</strong> - {{ user.name }}</p>
+  <p><strong>email</strong> - {{ user.email }}</p>
+  <p><strong>address</strong> -
+    {{ user.address.street }},
+    {{ user.address.suite }},
+    {{ user.address.city }},
+    {{ user.address.zipcode }},
+    {{ user.address.geo.lat }},
+    {{ user.address.geo.lng }}
+  </p>
+  <p><strong>phone</strong> - {{ user.phone }}</p>
+  <p><strong>site</strong> - {{ user.website }}</p>
+  <p><strong>company</strong> -
+    {{ user.company.name }},
+    {{ user.company.catchPhrase }},
+    {{ user.company.bs }}
+  </p>
+</div>

@@ -4,10 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, catchError, tap, map } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 
-// Импорт необходимых модулей PrimeNG
-import { CarouselModule } from 'primeng/carousel';
-import { ButtonModule } from 'primeng/button';
-import { TagModule } from 'primeng/tag';
+
 
 @Component({
   selector: 'app-weather',

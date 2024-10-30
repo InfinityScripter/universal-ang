@@ -35,19 +35,20 @@ export class AppComponent {
 
   // Функция для анимации заднего фона
   animateBackground() {
-    // Calculate color values
+    // Вычисляем значения цвета с направлением
     const red = Math.round(this.mouseX * 255);
     const blue = Math.round(this.mouseY * 255);
-    const green = 100; // Adjusted for a lighter blue effect
+    const green = 120;
 
-    // Create a linear gradient with white, blue, and light blue stops
-    const gradient = `linear-gradient(135deg, rgb(255, 255, 255), rgb(${red}, ${green}, ${blue}), rgb(${blue}, ${green}, ${red}))`;
+    // Создаём градиент с учётом направления курсора
+    const gradient = `linear-gradient(${this.mouseX * 360}deg, rgb(255, 255, 255), rgb(${red}, ${green}, ${blue}), rgb(${blue}, ${green}, ${red}))`;
 
     // Анимируем изменение фона с помощью GSAP
     gsap.to(document.body, {
       backgroundImage: gradient,
-      duration: 10,
-      ease: 'power2.out'
+      zIndex: -1, // Помещаем фон под контент
+      duration: 0.5, // Уменьшаем длительность для быстрой реакции
+      ease: 'power3.out'
     });
   }
 }

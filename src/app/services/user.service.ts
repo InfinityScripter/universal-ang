@@ -1,4 +1,5 @@
-import {Injectable} from "@angular/core";
+import {inject, Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
 
 
 @Injectable({
@@ -6,6 +7,10 @@ import {Injectable} from "@angular/core";
 })
 
 export class UserService {
+
+  private http = inject(HttpClient);
+  private apiUrl = 'https://jsonplaceholder.typicode.com/users';
+
   getUserMock() {
     return {
       name: 'Misha',
@@ -13,5 +18,9 @@ export class UserService {
       email: 'hellomymailiscorrect@mail.ru',
       isAdmin: true
     }
+  }
+
+  getUsers() {
+    return this.http.get(this.apiUrl);
   }
 }

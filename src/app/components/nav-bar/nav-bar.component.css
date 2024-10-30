@@ -1,0 +1,24 @@
+/* Стили для контейнера навигационных кнопок */
+.nav-button {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+/* Стили для слова или букв в контейнере */
+.letter-wrap__word {
+  display: inline-flex;
+}
+
+.letter-wrap__char {
+  display: inline-block;
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+/* Анимация наводимого состояния: */
+.nav-button:hover .letter-wrap__char {
+  transform: translateY(-10%) scale(1.1);
+}
