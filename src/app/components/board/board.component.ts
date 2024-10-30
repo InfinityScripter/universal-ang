@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { SquareComponent } from "../square/square.component";
 import { NgForOf, NgIf } from "@angular/common";
 import confetti from 'canvas-confetti';
-import {DialogModule} from "primeng/dialog";
-import {Button} from "primeng/button";
-import {ChipsModule} from "primeng/chips";
-import {MatButton} from "@angular/material/button";
+import { DialogModule } from "primeng/dialog";
+import { Button } from "primeng/button";
+import { ChipsModule } from "primeng/chips";
+import { MatButton } from "@angular/material/button";
 
 @Component({
   selector: 'app-board',
@@ -26,7 +26,8 @@ export class BoardComponent implements OnInit {
   squares!: any[];
   xIsNext!: boolean;
   winner!: null | string;
-  visible: boolean = false; // Для диалогового окна
+  winningCombination!: number[] | null;
+  visible: boolean = false;
 
   constructor() {}
 
@@ -37,8 +38,9 @@ export class BoardComponent implements OnInit {
   newGame() {
     this.squares = Array(9).fill(null);
     this.winner = null;
+    this.winningCombination = null;
     this.xIsNext = true;
-    this.visible = false; // Скрыть диалог при новой игре
+    this.visible = false;
   }
 
   get player() {
@@ -52,7 +54,6 @@ export class BoardComponent implements OnInit {
     }
     this.winner = this.calculateWinner();
 
-    // Если есть победитель, показать диалог и запустить конфетти
     if (this.winner) {
       this.showCelebration();
     }
@@ -76,6 +77,7 @@ export class BoardComponent implements OnInit {
         this.squares[a] === this.squares[b] &&
         this.squares[a] === this.squares[c]
       ) {
+        this.winningCombination = [a, b, c];
         return this.squares[a];
       }
     }
@@ -92,7 +94,5 @@ export class BoardComponent implements OnInit {
   }
 
 
-  showDialog() {
-    this.visible = true;
-  }
+
 }

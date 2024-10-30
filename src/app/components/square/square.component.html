@@ -1,4 +1,5 @@
-<!-- Привязываем цвет фона через `[style.backgroundColor]` -->
-<button [style.backgroundColor]="getBackgroundColor()" class="square-button">
+<button #squareButton [style.backgroundColor]="getBackgroundColor()"
+        [class.winning-square]="isWinningSquare"
+        class="square-button">
   {{ value }}
 </button>

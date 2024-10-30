@@ -9,3 +9,9 @@
   align-items: center;
   justify-content: center;
 }
+
+.winning-square {
+  background-color: #28a745 !important;
+  font-weight: bold;
+  box-shadow: 0 0 10px #28a745;
+}
