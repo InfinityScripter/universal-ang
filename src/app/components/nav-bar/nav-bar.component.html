@@ -51,6 +51,16 @@
       <span class="ml-2">Weather</span>
     </a>
   </li>
+  <li>
+    <a mat-flat-button
+       color="primary"
+       routerLink="/games"
+       routerLinkActive="mat-accent"
+       class="text-white">
+      <mat-icon>sports_esports</mat-icon>
+      <span class="ml-2">Games</span>
+    </a>
+  </li>
 </ul>
 
 <!-- Mobile Navigation (p-toolbar) -->
@@ -94,6 +104,13 @@
          routerLinkActive="mat-accent"
          class="text-white">
         <mat-icon>thermostat</mat-icon>
+      </a>
+      <a mat-icon-button
+         color="primary"
+         routerLink="/games"
+         routerLinkActive="mat-accent"
+         class="text-white">
+        <mat-icon>sports_esports</mat-icon>
       </a>
     </div>
   </ng-template>
